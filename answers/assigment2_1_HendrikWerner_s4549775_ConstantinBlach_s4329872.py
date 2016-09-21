@@ -6,7 +6,7 @@ from pylab import *
 from scipy.stats.mstats import zscore
 
 # assignment 2.1.1
-wine_data = scipy.io.loadmat("wine.mat")
+wine_data = scipy.io.loadmat("./data/wine.mat")
 attribute_names = wine_data["attributeNames"]
 
 columns = [wine_data["X"][:, i] for i in range(12)]
