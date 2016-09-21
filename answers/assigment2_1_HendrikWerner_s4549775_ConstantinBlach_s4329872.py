@@ -1,9 +1,9 @@
 # author: Hendrik Werner s4549775
 # author Constantin Blach s4329872
 
+import scipy.io
 from pylab import *
 from scipy.stats.mstats import zscore
-import scipy.io
 
 # assignment 2.1.1
 wine_data = scipy.io.loadmat("wine.mat")
