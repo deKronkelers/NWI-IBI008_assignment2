@@ -14,11 +14,9 @@ f = figure()
 for i, values in enumerate(columns):
     s = f.add_subplot(1, 12, i + 1)
     s.hist(values)
+    s = f.add_subplot(2, 12, i + 1)
+    s.boxplot(zscore(values))
     s.set_title(attribute_names[0, i][0])
-    s1 = f.add_subplot(2, 12, i + 1)
-    s1.boxplot(zscore(values))
-    s1.set_title(attribute_names[0, i][0])
-    i += 1
 show()
 
 # assignment 2.1.2
