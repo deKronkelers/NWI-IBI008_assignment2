@@ -29,15 +29,25 @@ volatile_acidity_filtered = remove_outliers(columns[1], 2)
 density_filtered = remove_outliers(columns[7], 1)
 alcohol_filtered = remove_outliers(columns[10], 5)
 
-f2 = figure()
-j = 1
-for i, values in [(1, volatile_acidity_filtered), (7, density_filtered), (10, alcohol_filtered)]:
-    s = f2.add_subplot(1, 3, j)
-    s.hist(columns[i])
-    s = f2.add_subplot(2, 3, j)
-    s.hist(values)
-    s.set_title(attribute_names[0, i][0])
-    j += 1
+filtered_attributes = [(1, volatile_acidity_filtered, "g/dm^3"), (7, density_filtered, "g/cm^3"),
+                       (10, alcohol_filtered, "%vol")]
+
+f2, grid = plt.subplots(2, 3)
+y_label = "Number of data points"
+for x in range(3):
+    attribute = filtered_attributes[x]
+    attribute_name = attribute_names[0, attribute[0]][0]
+    s = grid[0, x]
+    s.set_title(attribute_name)
+    s.hist(columns[attribute[0]])
+    s.set_xlabel("{} in {}".format(attribute_name, attribute[2]))
+    s.set_ylabel(y_label)
+    s = grid[1, x]
+    s.hist(attribute[1])
+    s.set_xlabel("{} in {}".format(attribute_name, attribute[2]))
+    s.set_ylabel(y_label)
+
+plt.tight_layout()
 show()
 
 # assignment 2.1.2
