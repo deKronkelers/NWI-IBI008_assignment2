@@ -82,7 +82,7 @@ for i, attribute in enumerate(filtered_attributes):
     s.set_title(attribute_name)
     s.scatter(attribute[1], attribute[2])
     s.set_xlabel("{} in {}".format(attribute_name, attribute_units[attribute[0]]))
-    s.set_ylabel("Number of data points")
+    s.set_ylabel(attribute_names[0, 11][0])
     print(pearsonr(attribute[1], attribute[2]))
 plt.tight_layout()
 show()
