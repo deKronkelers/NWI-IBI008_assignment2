@@ -3,6 +3,7 @@
 
 import scipy.io
 from pylab import *
+from scipy.stats import pearsonr
 from scipy.stats.mstats import zscore
 
 # assignment 2.1.1
@@ -75,3 +76,14 @@ plt.tight_layout()
 show()
 
 # assignment 2.1.2
+f3, grid = plt.subplots(1, 3)
+for i, attribute in enumerate(filtered_attributes):
+    attribute_name = attribute_names[0, attribute[0]][0]
+    s = grid[i]
+    s.set_title(attribute_name)
+    s.scatter(attribute[1], attribute[2])
+    s.set_xlabel("{} in {}".format(attribute_name, attribute_units[attribute[0]]))
+    s.set_ylabel("Number of data points")
+    print(pearsonr(attribute[1], attribute[2]))
+plt.tight_layout()
+show()
