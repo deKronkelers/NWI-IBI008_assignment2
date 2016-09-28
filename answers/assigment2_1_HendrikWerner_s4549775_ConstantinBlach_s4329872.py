@@ -14,13 +14,22 @@ attribute_units = [
 ]
 
 columns = [wine_data["X"][:, i] for i in range(12)]
-f = figure()
+f, grid = plt.subplots(2, 12)
 for i, values in enumerate(columns):
-    s = f.add_subplot(1, 12, i + 1)
+    attribute_name = attribute_names[0, i][0]
+    x_label = attribute_units[i]
+    y_label = "Number of data points"
+    s = grid[0, i]
+    s.set_title(attribute_name)
     s.hist(values)
-    s = f.add_subplot(2, 12, i + 1)
+    s.set_xlabel(x_label)
+    if i == 0:
+        s.set_ylabel(y_label)
+    s = grid[1, i]
     s.boxplot(zscore(values))
-    s.set_title(attribute_names[0, i][0])
+    s.set_xlabel(x_label)
+    if i == 0:
+        s.set_ylabel(y_label)
 show()
 
 
