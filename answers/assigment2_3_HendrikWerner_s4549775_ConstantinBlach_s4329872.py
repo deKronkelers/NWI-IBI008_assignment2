@@ -38,3 +38,19 @@ mx_4 = combinations_of_4_means.mean()
 print("mx for combinations of 4:\n{}".format(mx_4))
 sigmax_4 = combinations_of_4_means.std()
 print("sigmax for combinations of 4:\n{}".format(sigmax_4))
+
+
+# assignment 2.3.1 iv
+def approximate_sigmax_crude(n):
+    return standard_deviation / n ** .5
+
+
+def approximate_sigmax_good(m, n):
+    return (standard_deviation / n ** .5) * ((m - n) / (m - 1)) ** .5
+
+
+print("\n(iv)")
+print("Crude approximation of sigmax for n=2: {}".format(approximate_sigmax_crude(2)))
+print("Good approximation of sigmax for n=2: {}".format(approximate_sigmax_good(len(data), 2)))
+print("Crude approximation of sigmax for n=4: {}".format(approximate_sigmax_crude(4)))
+print("Good approximation of sigmax for n=4: {}".format(approximate_sigmax_good(len(data), 4)))
