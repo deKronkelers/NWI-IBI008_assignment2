@@ -71,7 +71,6 @@ for x in range(3):
     s.hist(attribute[1])
     s.set_xlabel(x_label)
     s.set_ylabel(y_label)
-
 plt.tight_layout()
 show()
 
