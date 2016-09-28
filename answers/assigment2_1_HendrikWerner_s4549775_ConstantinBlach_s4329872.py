@@ -8,6 +8,10 @@ from scipy.stats.mstats import zscore
 # assignment 2.1.1
 wine_data = scipy.io.loadmat("./data/wine.mat")
 attribute_names = wine_data["attributeNames"]
+attribute_units = [
+    "g/dm^3", "g/dm^3", "g/dm^3", "g/dm^3", "g/dm^3", "mg/dm^3", "mg/dm^3",
+    "g/cm^3", "pH", "g/dm^3", "% vol.", "0-10"
+]
 
 columns = [wine_data["X"][:, i] for i in range(12)]
 f = figure()
@@ -29,8 +33,8 @@ volatile_acidity_filtered = remove_outliers(columns[1], 2)
 density_filtered = remove_outliers(columns[7], 1)
 alcohol_filtered = remove_outliers(columns[10], 5)
 
-filtered_attributes = [(1, volatile_acidity_filtered, "g/dm^3"), (7, density_filtered, "g/cm^3"),
-                       (10, alcohol_filtered, "%vol")]
+filtered_attributes = [(1, volatile_acidity_filtered), (7, density_filtered),
+                       (10, alcohol_filtered)]
 
 f2, grid = plt.subplots(2, 3)
 y_label = "Number of data points"
@@ -40,11 +44,11 @@ for x in range(3):
     s = grid[0, x]
     s.set_title(attribute_name)
     s.hist(columns[attribute[0]])
-    s.set_xlabel("{} in {}".format(attribute_name, attribute[2]))
+    s.set_xlabel("{} in {}".format(attribute_name, attribute_units[attribute[0]]))
     s.set_ylabel(y_label)
     s = grid[1, x]
     s.hist(attribute[1])
-    s.set_xlabel("{} in {}".format(attribute_name, attribute[2]))
+    s.set_xlabel("{} in {}".format(attribute_name, attribute_units[attribute[0]]))
     s.set_ylabel(y_label)
 
 plt.tight_layout()
