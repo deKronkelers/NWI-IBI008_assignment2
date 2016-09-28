@@ -34,16 +34,26 @@ show()
 
 
 # remove outliers
-def remove_outliers(values, expected_value, factor=10):
-    return np.array(list(filter(lambda value: value < expected_value * factor, values)))
+def remove_outliers(values, scores, expected_value, factor=10):
+    i = 0
+    while i < values.shape[0]:
+        if values[i] >= expected_value * factor:
+            values = np.delete(values, i)
+            scores = np.delete(scores, i)
+        else:
+            i += 1
+    return values, scores
 
 
-volatile_acidity_filtered = remove_outliers(columns[1], 2)
-density_filtered = remove_outliers(columns[7], 1)
-alcohol_filtered = remove_outliers(columns[10], 5)
+volatile_acidity_filtered, volatile_acidity_scores = remove_outliers(columns[1], list(columns[11]), 2)
+density_filtered, density_scores = remove_outliers(columns[7], list(columns[11]), 1)
+alcohol_filtered, alcohol_scores = remove_outliers(columns[10], list(columns[11]), 5)
 
-filtered_attributes = [(1, volatile_acidity_filtered), (7, density_filtered),
-                       (10, alcohol_filtered)]
+filtered_attributes = [
+    (1, volatile_acidity_filtered, volatile_acidity_scores),
+    (7, density_filtered, density_scores),
+    (10, alcohol_filtered, alcohol_scores)
+]
 
 f2, grid = plt.subplots(2, 3)
 y_label = "Number of data points"
