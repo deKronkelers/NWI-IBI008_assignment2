@@ -41,14 +41,15 @@ y_label = "Number of data points"
 for x in range(3):
     attribute = filtered_attributes[x]
     attribute_name = attribute_names[0, attribute[0]][0]
+    x_label = "{} in {}".format(attribute_name, attribute_units[attribute[0]])
     s = grid[0, x]
     s.set_title(attribute_name)
     s.hist(columns[attribute[0]])
-    s.set_xlabel("{} in {}".format(attribute_name, attribute_units[attribute[0]]))
+    s.set_xlabel(x_label)
     s.set_ylabel(y_label)
     s = grid[1, x]
     s.hist(attribute[1])
-    s.set_xlabel("{} in {}".format(attribute_name, attribute_units[attribute[0]]))
+    s.set_xlabel(x_label)
     s.set_ylabel(y_label)
 
 plt.tight_layout()
