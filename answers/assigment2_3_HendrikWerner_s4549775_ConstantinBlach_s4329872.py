@@ -25,3 +25,16 @@ combinations_of_4 = list(itertools.combinations(data, 4))
 print("Combinations of four aliens:\n{}".format(combinations_of_4))
 combinations_of_4_with_mean = [(array(c).mean(), c) for c in combinations_of_4]
 print("Combinations of four aliens with their mean:\n{}".format(combinations_of_4_with_mean))
+
+# assignment 2.3.1 iii
+print("\n(iii)")
+combinations_of_2_means = array([mc[0] for mc in combinations_of_2_with_mean])
+mx_2 = combinations_of_2_means.mean()
+print("mx for combinations of 2:\n{}".format(mx_2))
+sigmax_2 = combinations_of_2_means.std()
+print("sigmax for combinations of 2:\n{}".format(sigmax_2))
+combinations_of_4_means = array([mc[0] for mc in combinations_of_4_with_mean])
+mx_4 = combinations_of_4_means.mean()
+print("mx for combinations of 4:\n{}".format(mx_4))
+sigmax_4 = combinations_of_4_means.std()
+print("sigmax for combinations of 4:\n{}".format(sigmax_4))
