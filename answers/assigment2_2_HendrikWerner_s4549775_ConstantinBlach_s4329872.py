@@ -27,7 +27,7 @@ def filter_data(data_set, class_index, keep=None):
         else:
             data_set = np.delete(data_set, i, 0)
             class_index = np.delete(class_index, i)
-    return data_set, class_indexq
+    return data_set, class_index
 
 
 X_filtered, y_filtered = filter_data(X, y, keep=[0, 1])
