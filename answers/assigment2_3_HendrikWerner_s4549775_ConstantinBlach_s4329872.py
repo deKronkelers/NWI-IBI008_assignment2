@@ -3,7 +3,7 @@
 
 import itertools
 
-from numpy import array
+from pylab import *
 
 # assignment 2.3.1
 data = array([2, 3, 6, 8, 11, 18])
@@ -54,3 +54,17 @@ print("Crude approximation of sigmax for n=2: {}".format(approximate_sigmax_crud
 print("Good approximation of sigmax for n=2: {}".format(approximate_sigmax_good(len(data), 2)))
 print("Crude approximation of sigmax for n=4: {}".format(approximate_sigmax_crude(4)))
 print("Good approximation of sigmax for n=4: {}".format(approximate_sigmax_good(len(data), 4)))
+
+# assignment 2.3.1 v
+f, grid = plt.subplots(1, 3)
+for i, data_set in enumerate([
+    ("Population", data),
+    ("Sample means n=2", combinations_of_2_means),
+    ("Sample means n=4", combinations_of_4_means)
+]):
+    s = grid[i]
+    s.hist(data_set[1], bins=range(2, 19))
+    s.set_xlabel(data_set[0])
+    s.set_ylabel("Number of data points")
+plt.tight_layout()
+show()
