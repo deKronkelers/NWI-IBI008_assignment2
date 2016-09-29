@@ -19,19 +19,17 @@ columns = [wine_data["X"][:, i] for i in range(12)]
 f, grid = plt.subplots(2, 12)
 for i, values in enumerate(columns):
     attribute_name = attribute_names[i]
-    x_label = attribute_units[i]
-    y_label = "Number of data points"
     s = grid[0, i]
     s.set_title(attribute_name)
     s.hist(values)
-    s.set_xlabel(x_label)
+    s.set_xlabel(attribute_units[i])
     if i == 0:
-        s.set_ylabel(y_label)
+        s.set_ylabel("Number of data points")
     s = grid[1, i]
     s.boxplot(zscore(values))
-    s.set_xlabel(x_label)
+    s.set_xlabel(attribute_name)
     if i == 0:
-        s.set_ylabel(y_label)
+        s.set_ylabel("zscores")
 show()
 
 
