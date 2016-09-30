@@ -2,6 +2,8 @@
 # author: Constantin Blach s4329872
 # some code is taken from ex2_1_1.py
 
+import itertools
+
 from pylab import *
 from scipy.io import loadmat
 
@@ -53,3 +55,21 @@ V = np.transpose(Vt)
 X = np.dot(Y, V[:, :4])
 W = np.dot(X, np.transpose(V[:, 0:4])) + means
 show_first_10(W)
+
+# make a matrix of scatter plots of each combination of two principal
+# components for PC1-PC4 against each other
+principal_components = [(i, X[:, i]) for i in range(4)]
+pc_combinations = list(itertools.combinations(principal_components, 2))
+f, grid = plt.subplots(2, 3)
+for i, combination in enumerate(pc_combinations):
+    pc1 = combination[0][1]
+    pc1_nr = combination[0][0]
+    pc2 = combination[1][1]
+    pc2_nr = combination[1][0]
+    s = grid[i // 3, i % 3]
+    s.set_title("PC{} against PC{}". format(pc1_nr, pc2_nr))
+    s.set_xlabel("PC{}".format(pc1_nr))
+    s.set_ylabel("PC{}".format(pc2_nr))
+    s.scatter(pc1, pc2)
+plt.tight_layout()
+show()
