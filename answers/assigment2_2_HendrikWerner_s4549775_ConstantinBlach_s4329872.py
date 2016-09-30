@@ -4,6 +4,7 @@
 
 import itertools
 
+from mpl_toolkits.mplot3d import Axes3D
 from pylab import *
 from scipy.io import loadmat
 
@@ -72,4 +73,25 @@ for i, combination in enumerate(pc_combinations):
     s.set_ylabel("PC{}".format(pc2_nr))
     s.scatter(pc1, pc2)
 plt.tight_layout()
+show()
+
+# make a 3-dimensional scatter plot of three principal components PC1-PC3
+# plot elements belonging to different class in different colors
+fig = plt.figure()
+ax3D = fig.add_subplot(111, projection="3d")
+for i in range(y_filtered.shape[1]):
+    if y_filtered[0, i] == 0:
+        ax3D.scatter(
+            np.array(principal_components[0][1][i]),
+            np.array(principal_components[1][1][i]),
+            np.array(principal_components[2][1][i]),
+            c="r"
+        )
+    else:
+        ax3D.scatter(
+            np.array(principal_components[0][1][i]),
+            np.array(principal_components[1][1][i]),
+            np.array(principal_components[2][1][i]),
+            c="b"
+        )
 show()
