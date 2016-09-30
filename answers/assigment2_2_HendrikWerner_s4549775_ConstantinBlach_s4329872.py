@@ -10,7 +10,7 @@ from scipy.io import loadmat
 # Load Matlab data file to python dict structure
 mat_data = loadmat('./data/zipdata.mat')
 
-# Extract variables of interest
+# create the data matrix X and the class index vector y from the data
 testdata = mat_data['testdata']
 traindata = mat_data['traindata']
 X = matrix(traindata[:, 1:])
@@ -29,7 +29,7 @@ def filter_data(data_set, class_index, keep=None):
             class_index = np.delete(class_index, i)
     return data_set, class_index
 
-
+# remove the digits with the class index 2-9 from the data
 X_filtered, y_filtered = filter_data(X, y, keep=[0, 1])
 
 
