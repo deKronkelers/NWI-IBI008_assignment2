@@ -32,10 +32,24 @@ def filter_data(data_set, class_index, keep=None):
 
 X_filtered, y_filtered = filter_data(X, y, keep=[0, 1])
 
-f, grid = plt.subplots(2, 5)
-for i, x in enumerate(X_filtered[:10, :]):
-    x = reshape(x, (16, 16))
-    s = grid[i // 5, i % 5]
-    s.set_title("Image #{}".format(i))
-    s.imshow(x, extent=(0, 16, 0, 16), cmap=cm.gray_r)
-show()
+
+def show_first_10(D):
+    f, grid = plt.subplots(2, 5)
+    for i, x in enumerate(D[:10, :]):
+        x = reshape(x, (16, 16))
+        s = grid[i // 5, i % 5]
+        s.set_title("Image #{}".format(i))
+        s.imshow(x, extent=(0, 16, 0, 16), cmap=cm.gray_r)
+    show()
+
+show_first_10(X_filtered)
+
+means = [X_filtered[:, col].mean() for col in range(256)]
+Y = X_filtered - np.ones((X_filtered.shape[1])) * means
+U, s, Vt = linalg.svd(Y)
+V = np.transpose(Vt)
+
+# create a new data matrix X overwriting the old data matrix
+X = np.dot(Y, V[:, :4])
+W = np.dot(X, np.transpose(V[:, 0:4])) + means
+show_first_10(W)
