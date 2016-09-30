@@ -54,7 +54,7 @@ V = np.transpose(Vt)
 
 # create a new data matrix X overwriting the old data matrix
 X = np.dot(Y, V[:, :4])
-W = np.dot(X, np.transpose(V[:, 0:4])) + means
+W = np.dot(X, np.transpose(V[:, :4])) + means
 show_first_10(W)
 
 # make a matrix of scatter plots of each combination of two principal
